@@ -63,6 +63,7 @@
             display: inline-block;
             padding-left: 100vw;
             font-weight: 500;
+            will-change: transform;
             animation: marquee 20s linear infinite; 
         }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
@@ -324,17 +325,16 @@
 </div>
 
 <script>
-    // URL API สำหรับเชื่อมต่อไปยัง Backend (GAS) ของคุณ
+    // ** ใส่ URL ของ GAS อันใหม่ที่นี่ **
     const GAS_URL = "https://script.google.com/macros/s/AKfycbyj5makwEBWb8GGz5VliiOop-Bu6tkMCcj3AW-6myWuwYF_p2mT4XsvycMbEbbi87l8Xw/exec";
     
     let currentUser = null;
     let allServices = [];
     let currentServiceRate = 0;
 
-    // โหลดข้อมูลสถิติหน้าแรกทันทีที่เปิดเว็บ
+    // โหลดข้อมูลสถิติทันทีที่เปิดเว็บขึ้นมา (ฝั่ง GAS อัปเดตให้รองรับแล้ว)
     window.addEventListener('DOMContentLoaded', async () => {
         try {
-            // ดึงข้อมูลรวมโดยการส่ง userId แบบว่าง/null เพื่อเอาแค่ข้อมูล Global (อิงจากโครงสร้าง API ของคุณ)
             const res = await callGAS({ action: 'getDashboard', userId: null });
             if(res && res.success) {
                 document.getElementById('auth-stat-users').innerText = res.totalUsers || "0";
@@ -417,15 +417,17 @@
         document.getElementById('register-form').classList.toggle('hidden');
     }
 
-    // ฟังก์ชันยิง API แบบ fetch (สำหรับใช้บน GitHub)
+    // ฟังก์ชันยิง API แบบ fetch (ปรับเพิ่ม Headers เพื่อหลบปัญหากับ GitHub Pages)
     async function callGAS(data) {
         try {
             const response = await fetch(GAS_URL, {
                 method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(data)
             });
             return await response.json();
         } catch(e) {
+            console.error("Fetch Error:", e);
             return { success: false, message: "Network Error: ระบบขัดข้อง ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้" };
         }
     }
@@ -489,11 +491,11 @@
             document.getElementById('stat-users').innerText = data.totalUsers;
             document.getElementById('stat-orders').innerText = data.totalOrders;
             
-            // อัปเดตสถิติหน้าเข้าสู่ระบบเผื่อไว้เวลาล็อกเอาท์
+            // อัปเดตเผื่อไว้ตอน Logout แล้วหน้าสถิติยังเป็นปัจจุบัน
             document.getElementById('auth-stat-users').innerText = data.totalUsers;
             document.getElementById('auth-stat-orders').innerText = data.totalOrders;
             
-            let mText = data.allHistory.slice(0, 3).map(h => `รหัส: ${h.order_id} | ${h.service} | สถานะ: ${h.status}`).join('    •    ');
+            let mText = data.allHistory.slice(0, 3).map(h => `รหัส: ${h.order_id} | ${h.service.substring(0, 20)} | สถานะ: ${h.status}`).join('    •    ');
             document.getElementById('marquee-text').innerHTML = mText || "ยังไม่มีประวัติการสั่งซื้อ...";
 
             const tbody = document.getElementById('history-table');
