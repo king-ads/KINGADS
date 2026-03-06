@@ -3,850 +3,663 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KingAds - บริการปั๊มยอดโซเชียล 24 ชม.</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <title>KingAds - บริการเพิ่มยอดโซเชียล 24 ชม.</title>
+    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-pink: #f472b6;
-            --dark-pink: #db2777;
-            --light-pink: #fdf2f8;
-            --bg-pink: #fce7f3;
+            --primary: #ff65a3;
+            --primary-hover: #ff4791;
+            --primary-light: #ff99c2;
+            --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #ffe6f0 100%);
+            --white: #ffffff;
+            --text: #5a3a46;
+            --text-light: #8e6d79;
+            --shadow: 0 8px 25px rgba(255, 101, 163, 0.15);
+            --radius-box: 24px;
+            --radius-pill: 50px;
         }
 
-        body {
-            font-family: 'Kanit', sans-serif;
-            background-color: var(--bg-pink);
-            background-image: radial-gradient(var(--light-pink) 2px, transparent 2px);
-            background-size: 30px 30px;
-            color: #374151;
-            min-height: 100vh;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary); }
+        .svg-icon { width: 18px; height: 18px; fill: currentColor; display: inline-block; vertical-align: -4px; margin-right: 5px; }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.95);
+        /* Header */
+        .header-card {
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-box);
+            padding: 15px 25px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 2px solid #fff;
         }
+        .logo { height: 45px; }
 
-        .btn-pink {
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--dark-pink) 100%);
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.2);
-        }
-        .btn-pink:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(219, 39, 119, 0.3);
-        }
-
-        /* Marquee แบบสมูธ */
-        .marquee-container {
+        /* Full Width Marquee */
+        .marquee-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: var(--primary-light);
+            color: var(--white);
+            padding: 10px 0;
             overflow: hidden;
             white-space: nowrap;
-            background: var(--light-pink);
-            color: var(--dark-pink);
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 2px dashed #fbcfe8;
-            font-weight: 500;
-            position: relative;
-            width: 100%;
+            box-shadow: 0 4px 10px rgba(255, 153, 194, 0.3);
+            margin-bottom: 25px;
         }
         .marquee-content {
             display: inline-block;
-            white-space: nowrap;
-            padding-left: 100%;
-            will-change: transform;
-            animation: smoothMarquee 25s linear infinite;
+            padding-left: 100vw;
+            font-weight: 500;
+            animation: marquee 20s linear infinite; 
         }
-        .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
-        }
-        @keyframes smoothMarquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        .cat-card {
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+        /* Nav Tabs */
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-pill);
+            padding: 5px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 12px 10px;
+            background: transparent;
+            color: var(--text-light);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
             cursor: pointer;
-            filter: grayscale(40%);
+            transition: 0.3s;
+            font-size: 15px;
         }
-        .cat-card:hover, .cat-card.active {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
-        .cat-card.active {
-            border-color: var(--primary-pink);
-            background-color: var(--light-pink);
-            box-shadow: 0 4px 12px rgba(244, 114, 182, 0.3);
-        }
-        .cat-img { width: 50px; height: 50px; object-fit: contain; margin: 0 auto; }
+        .tab-btn.active { background: var(--primary); color: var(--white); box-shadow: 0 4px 10px rgba(255, 101, 163, 0.3); }
 
-        .service-item {
-            border: 2px solid #f3f4f6;
-            transition: all 0.2s ease;
-            cursor: pointer;
+        /* Cards & Forms */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-box);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border: 2px solid #fff;
         }
-        .service-item:hover, .service-item.selected {
-            border-color: #fbcfe8;
-            background-color: #fdf2f8;
-        }
-        .service-item.selected {
-            border-color: var(--dark-pink);
-            box-shadow: 0 2px 8px rgba(219, 39, 119, 0.15);
-        }
-
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; color: white; margin-right: 4px; margin-bottom: 4px; }
-        .badge-red { background-color: #ef4444; }
-        .badge-green { background-color: #10b981; }
-        .badge-yellow { background-color: #f59e0b; }
-        .badge-blue { background-color: #3b82f6; }
-        .badge-gray { background-color: #6b7280; }
-
-        .hide { display: none !important; }
         
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.3);
-            border-color: var(--primary-pink);
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .stat-box { background: #fff5f8; padding: 15px; border-radius: 18px; text-align: center; border: 1px dashed var(--primary-light); }
+        .stat-box h4 { color: var(--text-light); font-size: 14px; font-weight: 500; }
+        .stat-box h3 { color: var(--primary); font-size: 24px; margin-top: 5px; }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 20px;
+            margin: 8px 0 15px 0;
+            border: 2px solid #f0e1e6;
+            border-radius: var(--radius-pill);
+            font-size: 15px;
+            color: var(--text);
+            background: #faf7f8;
+            transition: 0.3s;
         }
+        textarea { border-radius: 16px; resize: vertical; }
+        input:focus, select:focus, textarea:focus { border-color: var(--primary); background: var(--white); outline: none; box-shadow: 0 0 0 4px rgba(255, 101, 163, 0.1); }
+        select optgroup { font-weight: 600; color: var(--primary); background: #fff; }
+        
+        button.action-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: var(--radius-pill); font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 101, 163, 0.3); }
+        button.action-btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        button.secondary-btn { background: #f2e6ea; color: var(--text); box-shadow: none; margin-top: 10px; }
+        button.secondary-btn:hover { background: #e8d7dd; }
+
+        /* Tables */
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-top: 10px; }
+        th, td { padding: 12px; text-align: left; font-size: 13px; }
+        th { color: var(--text-light); font-weight: 500; border-bottom: 2px solid #f0e1e6; }
+        tbody tr { background: #fffafb; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        tbody td:first-child { border-radius: 12px 0 0 12px; }
+        tbody td:last-child { border-radius: 0 12px 12px 0; }
+        .status-badge { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; color: white; display: inline-block;}
+        .status-Pending { background: #f3c212; } .status-Processing { background: #55c4f5; } .status-Completed { background: #56d98e; } .status-Canceled { background: #ff6b6b; }
+
+        /* Modals */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(90, 58, 70, 0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 30px; border-radius: var(--radius-box); width: 90%; max-width: 450px; max-height: 85vh; overflow-y: auto; text-align: center; }
+        .modal-content ul { text-align: left; margin: 15px 0 15px 25px; font-size: 14px; line-height: 1.6; color: var(--text-light); }
+        .modal-content li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-40 shadow-sm border-b border-pink-100">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png" alt="KingAds" class="h-12 w-12 rounded-full shadow-sm object-cover border-2 border-pink-200">
-                <div>
-                    <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-pink-700 m-0 leading-tight">KingAds</h1>
-                    <p class="text-[10px] text-gray-500 font-medium m-0 leading-tight">ระบบเพิ่มยอดอัตโนมัติ 24 ชม.</p>
-                </div>
-            </div>
-            
-            <div id="nav-user-info" class="hide flex items-center gap-4 bg-pink-50 px-4 py-2 rounded-full border border-pink-100">
-                <div class="flex items-center gap-2">
-                    <div class="bg-pink-100 p-2 rounded-full text-pink-600"><i class="fa-solid fa-wallet"></i></div>
-                    <div class="flex flex-col">
-                        <span class="text-[10px] text-gray-500 font-bold leading-tight">เครดิตคงเหลือ</span>
-                        <span class="text-sm font-bold text-pink-600 leading-tight">฿<span id="display-credit">0.00</span></span>
-                    </div>
-                </div>
-                <div class="w-px h-8 bg-pink-200"></div>
-                <button onclick="app.logout()" class="text-gray-400 hover:text-red-500 transition tooltip" title="ออกจากระบบ">
-                    <i class="fa-solid fa-right-from-bracket text-lg"></i>
-                </button>
+<div id="auth-view" class="container">
+    <div class="card text-center" style="margin-top: 30px;">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png" class="logo" alt="KingAds Logo" style="height: 90px; margin-bottom: 20px;">
+        <h2 style="color: var(--text); margin-bottom: 20px;">เข้าสู่ระบบ</h2>
+        <form id="login-form">
+            <input type="text" id="login-id" placeholder="ชื่อผู้ใช้" required>
+            <input type="password" id="login-pass" placeholder="รหัสผ่าน" required>
+            <button type="submit" class="action-btn">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> 
+                เข้าสู่ระบบ
+            </button>
+            <button type="button" class="action-btn secondary-btn" onclick="toggleAuth()">สร้างบัญชีใหม่</button>
+        </form>
+        <form id="register-form" class="hidden">
+            <input type="text" id="reg-id" placeholder="ตั้งชื่อผู้ใช้" required>
+            <input type="password" id="reg-pass" placeholder="ตั้งรหัสผ่าน" required>
+            <input type="text" id="reg-name" placeholder="ชื่อเล่น" required>
+            <button type="submit" class="action-btn">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 7a4 4 0 1 1 8 0 4 4 0 0 1-8 0zM20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                ยืนยันการสมัคร
+            </button>
+            <button type="button" class="action-btn secondary-btn" onclick="toggleAuth()">กลับไปเข้าสู่ระบบ</button>
+        </form>
+    </div>
+
+    <div class="stat-grid" style="margin-top: 20px;">
+        <div class="stat-box" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px);">
+            <h4>ผู้ใช้ระบบทั้งหมด</h4>
+            <h3 id="auth-stat-users">...</h3>
+        </div>
+        <div class="stat-box" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px);">
+            <h4>ออเดอร์ทั้งหมด</h4>
+            <h3 id="auth-stat-orders">...</h3>
+        </div>
+    </div>
+</div>
+
+<div id="dashboard-view" class="hidden">
+    <div class="container" style="padding-bottom: 0;">
+        <div class="header-card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png" class="logo" alt="KingAds Logo">
+            <div style="text-align: right;">
+                <p style="font-size: 12px; color: var(--text-light);">ยอดคงเหลือ</p>
+                <p><strong id="user-credit" style="color:var(--primary); font-size: 20px;">0.00</strong> ฿</p>
+                <span style="font-size: 12px; color: #aaa; cursor: pointer; text-decoration: underline;" onclick="logout()">ออกจากระบบ</span>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <main class="max-w-5xl mx-auto p-4 md:p-6 pb-24">
+    <div class="marquee-wrapper">
+        <div class="marquee-content" id="marquee-text">กำลังโหลดประวัติการสั่งซื้อล่าสุด...</div>
+    </div>
 
-        <section id="view-auth" class="flex items-center justify-center py-10">
-            <div class="glass-panel p-8 w-full max-w-md">
-                <div class="text-center mb-8">
-                    <div class="inline-block p-4 bg-pink-50 rounded-full mb-4 shadow-inner">
-                        <i class="fa-solid fa-crown text-5xl text-pink-500"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-800">ยินดีต้อนรับสู่ <span class="text-pink-600">KingAds</span></h2>
-                    <p class="text-gray-500 text-sm mt-1">กรุณาเข้าสู่ระบบหรือสมัครสมาชิกเพื่อใช้งาน</p>
-                </div>
+    <div class="container" style="padding-top: 0;">
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('tab-order', this)">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm10 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> สั่งซื้อ
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-topup', this)">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7M16 19h6M19 16v6M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> เติมเงิน
+            </button>
+            <button class="tab-btn" onclick="switchTab('tab-history', this)">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> ประวัติ
+            </button>
+        </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1 ml-1">ชื่อผู้ใช้ (Username)</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" id="auth-username" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white transition" placeholder="ตั้งชื่อผู้ใช้ของคุณ">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1 ml-1">รหัสผ่าน (Password)</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="password" id="auth-password" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white transition" placeholder="ระบุรหัสผ่าน">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 pt-4">
-                        <button onclick="app.authenticate('login')" class="btn-pink py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ
-                        </button>
-                        <button onclick="app.authenticate('register')" class="bg-white border-2 border-pink-400 text-pink-500 py-3 rounded-xl font-bold hover:bg-pink-50 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-user-plus"></i> สมัครสมาชิก
-                        </button>
-                    </div>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-gray-100 grid grid-cols-2 gap-4 text-center">
-                    <div class="bg-blue-50 p-3 rounded-xl">
-                        <i class="fa-solid fa-users text-blue-500 mb-1 text-lg"></i>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase">สมาชิกทั้งหมด</p>
-                        <p class="text-lg font-bold text-gray-800" id="stat-total-users">...</p>
-                    </div>
-                    <div class="bg-green-50 p-3 rounded-xl">
-                        <i class="fa-solid fa-chart-line text-green-500 mb-1 text-lg"></i>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase">ออเดอร์ทั้งหมด</p>
-                        <p class="text-lg font-bold text-gray-800" id="stat-total-orders">...</p>
-                    </div>
-                </div>
-
-                <div class="mt-6 text-center">
-                    <a href="https://lin.ee/9Jje0o4" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-[#00B900] hover:text-green-700 bg-[#00B900]/10 px-4 py-2 rounded-full transition">
-                        <i class="fa-brands fa-line text-lg"></i> ติดต่อแอดมิน KingAds
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-dashboard" class="hide">
-            
-            <div class="marquee-container mb-6 shadow-sm">
-                <div class="marquee-content text-sm" id="marquee-text">
-                    <i class="fa-solid fa-bullhorn mr-2"></i> ยินดีต้อนรับสู่ KingAds ระบบกำลังประมวลผลข้อมูล...
-                </div>
+        <div id="tab-order" class="tab-content">
+            <div class="stat-grid">
+                <div class="stat-box"><h4>ผู้ใช้ระบบทั้งหมด</h4><h3 id="stat-users">0</h3></div>
+                <div class="stat-box"><h4>ออเดอร์ทั้งหมด</h4><h3 id="stat-orders">0</h3></div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <button onclick="app.switchTab('order')" id="btn-tab-order" class="glass-panel p-4 text-center hover:bg-pink-50 transition border-pink-300 transform hover:scale-105">
-                    <div class="bg-pink-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 text-pink-500 text-2xl shadow-sm">
-                        <i class="fa-solid fa-cart-plus"></i>
-                    </div>
-                    <span class="font-bold text-gray-700">สั่งซื้อบริการ</span>
-                </button>
-                <button onclick="app.switchTab('topup')" id="btn-tab-topup" class="glass-panel p-4 text-center hover:bg-yellow-50 transition transform hover:scale-105">
-                    <div class="bg-yellow-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 text-yellow-500 text-2xl shadow-sm">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <span class="font-bold text-gray-700">เติมเงิน</span>
-                </button>
-                <button onclick="app.switchTab('history')" id="btn-tab-history" class="glass-panel p-4 text-center hover:bg-blue-50 transition transform hover:scale-105">
-                    <div class="bg-blue-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 text-blue-500 text-2xl shadow-sm">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                    </div>
-                    <span class="font-bold text-gray-700">ประวัติออเดอร์</span>
-                </button>
-                <button onclick="app.showModal('modal-howto')" class="glass-panel p-4 text-center hover:bg-green-50 transition transform hover:scale-105">
-                    <div class="bg-green-100 w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-3 text-green-500 text-2xl shadow-sm">
-                        <i class="fa-solid fa-book-open"></i>
-                    </div>
-                    <span class="font-bold text-gray-700">วิธีใช้งาน</span>
-                </button>
+            <div class="card">
+                <h3 class="text-center text-primary" style="margin-bottom: 20px;">เลือกบริการที่ต้องการ</h3>
+                
+                <select id="category-select" onchange="loadServices()"><option value="">-- เลือกหมวดหมู่บริการ --</option></select>
+                <select id="service-select" onchange="updateServiceInfo()"><option value="">-- เลือกบริการ --</option></select>
+                
+                <div id="service-info" class="hidden" style="background: #fff5f8; padding: 15px; border-radius: 16px; margin-bottom: 15px; font-size: 13px; color: var(--text-light); border: 1px dashed var(--primary-light);">
+                    <p style="margin-bottom: 5px;">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91 2.84.73 4.18 1.92 4.18 3.91-.01 1.83-1.38 2.83-3.12 3.16z" stroke="currentColor" fill="none"/></svg>
+                        <strong>ราคา:</strong> <span id="info-price" style="color:var(--primary); font-weight:bold; font-size: 15px;"></span>
+                    </p>
+                    <p style="margin-bottom: 5px;">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                        <strong>ตัวอย่างลิงก์:</strong> <span id="info-link" style="word-break: break-all;"></span>
+                    </p>
+                    <p>
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M18 9l-5 5-4-4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+                        <strong>ขั้นต่ำ/สูงสุด:</strong> <span id="info-minmax"></span>
+                    </p>
+                </div>
+
+                <input type="url" id="order-link" placeholder="วางลิงก์ที่นี่..." required>
+                
+                <textarea id="order-comments" class="hidden" rows="5" placeholder="พิมพ์คอมเมนต์ที่นี่ (1 บรรทัด = 1 ยอดคอมเมนต์)" oninput="calculateCommentQty()"></textarea>
+
+                <input type="number" id="order-qty" placeholder="จำนวนยอดที่ต้องการ" oninput="calculatePrice()" required>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <span style="font-size: 14px; color: var(--text-light);">ราคารวม</span><br>
+                    <strong id="order-price" style="color: var(--primary); font-size: 28px;">0.00</strong> <span style="font-size: 16px;">฿</span>
+                </div>
+                <button class="action-btn" onclick="confirmOrder()">ยืนยันการสั่งซื้อ</button>
             </div>
+        </div>
 
-            <div id="tab-order" class="glass-panel p-6 md:p-8">
-                <div class="flex items-center gap-3 mb-6 border-b border-pink-100 pb-4">
-                    <div class="bg-pink-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-md">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">ฟอร์มสั่งซื้อ</h3>
+        <div id="tab-topup" class="tab-content hidden">
+            <div class="card">
+                <h3 class="text-center text-primary" style="margin-bottom: 20px;">สแกนเพื่อเติมเงิน</h3>
+                <div class="text-center" style="margin-bottom: 20px;">
+                    <img src="https://img2.pic.in.th/IMG_3739.jpeg" alt="QR Code" style="width: 180px; border-radius: 16px; box-shadow: var(--shadow);">
                 </div>
-
-                <div class="mb-8">
-                    <label class="block text-sm font-bold text-gray-700 mb-3"><i class="fa-solid fa-1 text-pink-400 mr-2"></i>เลือกแพลตฟอร์ม</label>
-                    <div class="grid grid-cols-3 md:grid-cols-7 gap-3" id="category-grid">
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('tiktok', this)">
-                            <img src="https://img5.pic.in.th/file/secure-sv1/IMG_143684649071c129c2d6.png" class="cat-img" alt="TikTok">
-                            <span class="text-xs font-bold mt-2 block">TikTok</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('instagram', this)">
-                            <img src="https://img2.pic.in.th/IMG_1435.png" class="cat-img" alt="Instagram">
-                            <span class="text-xs font-bold mt-2 block">Instagram</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('facebook', this)">
-                            <img src="https://img5.pic.in.th/file/secure-sv1/IMG_1430a1eccd208dcca4f6.png" class="cat-img" alt="Facebook">
-                            <span class="text-xs font-bold mt-2 block">Facebook</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('lemon8', this)">
-                            <img src="https://img2.pic.in.th/IMG_5089.webp" class="cat-img" alt="Lemon8">
-                            <span class="text-xs font-bold mt-2 block">Lemon8</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('youtube', this)">
-                            <img src="https://img2.pic.in.th/IMG_1456.png" class="cat-img" alt="YouTube">
-                            <span class="text-xs font-bold mt-2 block">YouTube</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm" onclick="app.selectCategory('x', this)">
-                            <img src="https://img5.pic.in.th/file/secure-sv1/IMG_14346409fe49ed2cf88e.png" class="cat-img" alt="X">
-                            <span class="text-xs font-bold mt-2 block">X (Twitter)</span>
-                        </div>
-                        <div class="cat-card bg-white p-3 rounded-xl text-center shadow-sm border-2 border-dashed border-pink-300" onclick="app.selectCategory('promo', this)">
-                            <div class="cat-img flex items-center justify-center text-red-500 text-3xl"><i class="fa-solid fa-fire"></i></div>
-                            <span class="text-xs font-bold mt-2 block text-red-500">โปรโมชัน</span>
-                        </div>
-                    </div>
+                <input type="number" id="topup-amount" placeholder="ระบุจำนวนเงินที่โอน (บาท)" required>
+                <input type="text" id="topup-ref" placeholder="รหัสอ้างอิงสลีป 6 ตัวท้าย" maxlength="6" required>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size: 14px; color: var(--text-light); margin-left: 10px;">แนบสลิปโอนเงิน</label>
+                    <input type="file" id="topup-file" accept="image/*" style="padding: 10px;" required>
                 </div>
-
-                <div id="step-service-container" class="mb-8 hide">
-                    <label class="block text-sm font-bold text-gray-700 mb-3"><i class="fa-solid fa-2 text-pink-400 mr-2"></i>เลือกบริการ</label>
-                    <div id="service-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2 pb-2">
-                    </div>
-                </div>
-
-                <div id="step-details-container" class="hide space-y-6 bg-white p-6 rounded-2xl border border-pink-100 shadow-sm">
-                    
-                    <div class="bg-pink-50 p-4 rounded-xl border border-pink-200">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-circle-info text-pink-500 mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-pink-700 text-sm mb-1" id="info-srv-name">ชื่อบริการ</h4>
-                                <div class="flex gap-4 text-xs text-gray-600 mb-2">
-                                    <span><i class="fa-solid fa-hashtag mr-1"></i>ID: <span id="info-srv-id">-</span></span>
-                                    <span><i class="fa-solid fa-arrow-down-up-across-line mr-1"></i>ขั้นต่ำ/สูงสุด: <span id="info-srv-minmax">-</span></span>
-                                </div>
-                                <p class="text-xs text-gray-500 leading-relaxed" id="info-srv-desc">รายละเอียดบริการ</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-1">ลิงก์ (Link)</label>
-                        <input type="text" id="input-link" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white" placeholder="วางลิงก์ที่ถูกต้องที่นี่...">
-                        <p class="text-[10px] text-red-500 mt-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i>ตั้งโปรไฟล์เป็นสาธารณะ ห้ามเปลี่ยนชื่อระหว่างทำ</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">จำนวนยอด</label>
-                            <input type="number" id="input-qty" oninput="app.calculatePrice()" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white" placeholder="ระบุจำนวน">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">ราคา (บาท)</label>
-                            <div class="relative">
-                                <span class="absolute left-4 top-1/2 transform -translate-y-1/2 font-bold text-pink-500">฿</span>
-                                <input type="text" id="input-price" readonly class="w-full pl-8 pr-4 py-3 rounded-xl bg-pink-50 border border-pink-200 text-pink-700 font-bold text-lg" value="0.00">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="app.submitOrder()" class="btn-pink w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> ยืนยันคำสั่งซื้อ
-                    </button>
-                </div>
+                <button class="action-btn" onclick="submitTopup()">แจ้งโอนเงิน</button>
             </div>
+        </div>
 
-            <div id="tab-topup" class="glass-panel p-6 md:p-8 hide">
-                <div class="flex items-center gap-3 mb-6 border-b border-pink-100 pb-4">
-                    <div class="bg-yellow-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-md">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">เติมเงินเข้าระบบ</h3>
-                </div>
-
-                <div class="max-w-md mx-auto">
-                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center mb-6">
-                        <img src="https://img2.pic.in.th/IMG_3739.jpeg" alt="Payment QR Code" class="w-56 mx-auto rounded-xl shadow-inner mb-3">
-                        <p class="text-sm font-bold text-gray-700">สแกนเพื่อโอนเงินเข้าบัญชีร้าน</p>
-                        <p class="text-xs text-gray-500">เมื่อโอนเสร็จแล้ว กรุณาแจ้งโอนด้านล่าง</p>
-                    </div>
-
-                    <div class="space-y-4 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">ยอดโอนเงิน (บาท)</label>
-                            <input type="number" id="topup-amount" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white" placeholder="เช่น 100">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">เลขที่อ้างอิงสลิป (6 ตัวท้าย)</label>
-                            <input type="text" id="topup-ref" maxlength="6" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white text-center font-mono tracking-widest text-lg" placeholder="123456">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">แนบรูปสลิปโอนเงิน</label>
-                            <div class="border-2 border-dashed border-gray-300 rounded-xl p-4 text-center hover:bg-gray-50 transition relative overflow-hidden">
-                                <input type="file" id="topup-file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="document.getElementById('file-name').innerText = this.files[0] ? this.files[0].name : 'ยังไม่ได้เลือกไฟล์';">
-                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
-                                <p class="text-sm text-gray-600 font-medium" id="file-name">คลิกเพื่อเลือกไฟล์รูปภาพ</p>
-                            </div>
-                        </div>
-                        
-                        <button onclick="app.submitTopup()" class="btn-pink w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 mt-4">
-                            <i class="fa-solid fa-check-circle"></i> แจ้งเติมเงิน
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-history" class="glass-panel p-6 md:p-8 hide">
-                <div class="flex justify-between items-center mb-6 border-b border-pink-100 pb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="bg-blue-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-md">
-                            <i class="fa-solid fa-list"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800">ประวัติ (10 รายการล่าสุด)</h3>
-                    </div>
-                    <button onclick="app.syncHistory()" class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold transition flex items-center gap-2">
-                        <i class="fa-solid fa-arrows-rotate"></i> อัปเดตสถานะ
-                    </button>
-                </div>
-
-                <div class="overflow-x-auto rounded-xl border border-gray-200">
-                    <table class="w-full text-sm text-left whitespace-nowrap">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                            <tr>
-                                <th class="px-4 py-3 border-b">รหัส (ID)</th>
-                                <th class="px-4 py-3 border-b">บริการ</th>
-                                <th class="px-4 py-3 border-b">จำนวน</th>
-                                <th class="px-4 py-3 border-b">ราคา</th>
-                                <th class="px-4 py-3 border-b">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body" class="bg-white">
-                        </tbody>
+        <div id="tab-history" class="tab-content hidden">
+            <div class="card">
+                <h3 class="text-primary" style="margin-bottom: 15px; font-size: 18px;">ประวัติ 10 รายการล่าสุด</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead><tr><th>รหัส</th><th>บริการ</th><th>จำนวน</th><th>ราคา</th><th>สถานะ</th></tr></thead>
+                        <tbody id="history-table"></tbody>
                     </table>
                 </div>
             </div>
-
-        </section>
-    </main>
-
-    <div id="loading-overlay" class="hide fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center transition-opacity">
-        <div class="relative w-24 h-24">
-            <div class="absolute inset-0 border-4 border-pink-100 rounded-full"></div>
-            <div class="absolute inset-0 border-4 border-pink-500 rounded-full border-t-transparent animate-spin"></div>
-            <div class="absolute inset-0 flex items-center justify-center text-pink-500 text-2xl">
-                <i class="fa-solid fa-crown"></i>
-            </div>
         </div>
-        <p class="mt-4 font-bold text-pink-600 tracking-wide animate-pulse">กำลังประมวลผล กรุณารอสักครู่...</p>
-    </div>
 
-    <div id="modal-howto" class="hide fixed inset-0 bg-gray-900/60 z-[60] flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col transform transition-all">
-            <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-pink-50">
-                <h3 class="text-xl font-bold text-pink-600 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open-reader"></i> คู่มือ & คำเตือนก่อนสั่งซื้อ
-                </h3>
-                <button onclick="app.closeModal('modal-howto')" class="text-gray-400 hover:text-red-500 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm text-gray-700">
-                <div class="bg-red-50 rounded-2xl p-4 border border-red-200">
-                    <h4 class="font-bold text-red-600 text-lg mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-triangle-exclamation"></i> กฎเหล็ก (สำคัญมาก!)
-                    </h4>
-                    <ul class="space-y-2 ml-1">
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-500 mt-1"></i> <div><strong>ตั้งค่าสาธารณะ:</strong> บัญชีต้องเป็น Public ห้ามเป็น Private เด็ดขาด</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-500 mt-1"></i> <div><strong>ห้ามเปลี่ยนชื่อ:</strong> ห้ามเปลี่ยน Username หรือลบโพสต์ขณะงานกำลังเดิน</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-ban text-red-500 mt-1"></i> <div><strong>ห้ามสั่งซ้ำ:</strong> อย่าสั่งลิงก์เดิมซ้ำ หากสถานะงานเก่ายังไม่ขึ้น Completed</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> <div><strong>ทดสอบก่อน:</strong> แนะนำให้สั่งจำนวนขั้นต่ำก่อน เพื่อทดสอบระบบ</div></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-800 border-b pb-2 mb-3"><i class="fa-solid fa-tags text-pink-500 mr-2"></i> สัญลักษณ์บริการ</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                        <div class="bg-gray-50 p-2 rounded"><i class="fa-solid fa-star text-yellow-500 w-4"></i> ยอดนิยม</div>
-                        <div class="bg-gray-50 p-2 rounded"><i class="fa-solid fa-bolt text-yellow-500 w-4"></i> เริ่มทันที / เร็วมาก</div>
-                        <div class="bg-gray-50 p-2 rounded"><i class="fa-solid fa-fire text-red-500 w-4"></i> บริการพิเศษ</div>
-                        <div class="bg-gray-50 p-2 rounded"><i class="fa-solid fa-recycle text-green-500 w-4"></i> มีปุ่มเติมยอด</div>
-                        <div class="bg-gray-50 p-2 rounded"><i class="fa-solid fa-ban text-red-500 w-4"></i> ยกเลิกได้</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[R]</b> รับประกันเติมยอด</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[R30]</b> ประกัน 30 วัน</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[NR]</b> ไม่รับประกัน</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[ND]</b> ยอดไม่ลด (No Drop)</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[BQ]</b> คุณภาพดีที่สุด</div>
-                        <div class="bg-gray-50 p-2 rounded"><b>[RQ]</b> บัญชีคนจริง</div>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-800 border-b pb-2 mb-3"><i class="fa-solid fa-link text-blue-500 mr-2"></i> ตัวอย่างการใส่ลิงก์</h4>
-                    <div class="space-y-3 font-mono text-xs bg-gray-800 text-gray-200 p-4 rounded-xl">
-                        <div>
-                            <p class="text-blue-300 font-bold mb-1"><i class="fa-brands fa-facebook"></i> Facebook</p>
-                            <p class="pl-4 break-all">ถูกใจ: https://www.facebook.com/photo/?fbid=12345</p>
-                            <p class="pl-4 break-all">ติดตาม: https://www.facebook.com/zuck</p>
-                        </div>
-                        <div>
-                            <p class="text-pink-300 font-bold mb-1"><i class="fa-brands fa-tiktok"></i> TikTok</p>
-                            <p class="pl-4 break-all">วิว/ใจ: https://www.tiktok.com/@user/video/1234</p>
-                            <p class="pl-4 break-all">ติดตาม: https://www.tiktok.com/@username</p>
-                        </div>
-                        <div>
-                            <p class="text-purple-300 font-bold mb-1"><i class="fa-brands fa-instagram"></i> Instagram</p>
-                            <p class="pl-4 break-all">ถูกใจ: https://www.instagram.com/p/xxxx/</p>
-                            <p class="pl-4 break-all">ติดตาม: https://www.instagram.com/username</p>
-                        </div>
-                    </div>
-                    <p class="text-[10px] text-red-500 mt-2">* ระบบไม่รองรับลิงก์แบบย่อ เช่น facebook.com/share/xxx</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-800 border-b pb-2 mb-3"><i class="fa-solid fa-list-ol text-green-500 mr-2"></i> วิธีใช้บริการ 5 ขั้นตอน</h4>
-                    <ol class="list-decimal pl-5 space-y-1">
-                        <li>สมัครสมาชิก และเข้าสู่ระบบ</li>
-                        <li>ไปที่เมนู <b class="text-yellow-600">"เติมเงิน"</b> และแนบสลิปพร้อมเลข 6 ตัวท้าย</li>
-                        <li>ไปที่ <b class="text-pink-600">"สั่งซื้อบริการ"</b> เลือกหมวดหมู่และแพลตฟอร์ม</li>
-                        <li>ใส่ <b>ลิงก์ที่ถูกต้อง</b> และระบุจำนวนยอด</li>
-                        <li>กดสั่งซื้อ ระบบจะตัดเครดิตและทำงานให้อัตโนมัติ สามารถดูสถานะที่เมนู <b>"ประวัติ"</b></li>
-                    </ol>
-                </div>
-            </div>
-            <div class="p-4 border-t border-gray-100">
-                <button onclick="app.closeModal('modal-howto')" class="btn-pink w-full py-3 rounded-xl font-bold">ฉันอ่านและเข้าใจแล้ว</button>
-            </div>
+    </div>
+</div>
+
+<div id="welcome-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2 style="color: var(--primary);">ยินดีต้อนรับสู่ KingAds</h2>
+        <p style="color: var(--text-light); font-size: 14px; margin-top: 5px;">ระบบเพิ่มยอดโซเชียลอันดับ 1</p>
+        <hr style="margin: 20px 0; border: 0.5px solid #f0e1e6;">
+        <h4 style="text-align: left; color: var(--text);">วิธีการใช้งานเบื้องต้น</h4>
+        <ul>
+            <li>สแกน QR Code เติมเงินและแจ้งโอนในหน้า <b>"เติมเงิน"</b></li>
+            <li>เลือกแพลตฟอร์มและบริการที่ต้องการ</li>
+            <li>ใส่ลิงก์ให้ถูกต้องตามคำแนะนำของระบบ</li>
+            <li>ใส่จำนวน ระบบจะคำนวณราคาอัตโนมัติ กดสั่งซื้อได้เลย</li>
+        </ul>
+        <h4 style="text-align: left; color: var(--text); margin-top: 15px;">สัญลักษณ์การรับประกัน</h4>
+        <ul>
+            <li><b>[R]</b> รับประกัน เติมยอดลดได้</li>
+            <li><b>[NR]</b> ไม่รับประกัน</li>
+            <li><b>[BQ]</b> บริการคุณภาพดีที่สุด</li>
+        </ul>
+        <button class="action-btn" style="margin-top: 10px;" onclick="closeModal('welcome-modal')">รับทราบและเข้าสู่ระบบ</button>
+    </div>
+</div>
+
+<div id="warning-modal" class="modal hidden">
+    <div class="modal-content">
+        <div style="color: #ff6b6b; margin-bottom: 10px;">
+            <svg style="width: 50px; height: 50px;" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
+        <h2 style="color: #ff6b6b;">คำเตือนก่อนสั่งซื้อ!</h2>
+        <ul>
+            <li><b>ตั้งเป็นสาธารณะ:</b> บัญชีต้องเป็น Public ห้ามเป็น Private</li>
+            <li><b>ห้ามเปลี่ยนชื่อ:</b> ห้ามเปลี่ยน Username ระหว่างดำเนินการ</li>
+            <li><b>การเติมยอด (Refill):</b> ทำได้เฉพาะเมื่อลิงก์/ชื่อผู้ใช้ยังเหมือนเดิม</li>
+            <li><b>รอให้เสร็จก่อน:</b> ห้ามสั่งลิงก์เดิมซ้ำหากงานเก่ายังไม่เสร็จสมบูรณ์</li>
+            <li style="color: #ff6b6b; font-weight: 500;">ระบบอัตโนมัติ ไม่สามารถยกเลิก/คืนเงินหากใส่ลิงก์ผิด</li>
+        </ul>
+        <button class="action-btn" style="margin-top: 15px; background: #ff6b6b;" onclick="processOrder()">ฉันเข้าใจแล้ว สั่งซื้อเลย</button>
+        <button class="action-btn secondary-btn" onclick="closeModal('warning-modal')">ยกเลิก</button>
     </div>
+</div>
 
-    <script>
-        const CONFIG = {
-            // *** นำ URL ของ Web App มาใส่ในบรรทัดด้านล่างนี้ ***
-            API_URL: "https://script.google.com/macros/s/AKfycbyj5makwEBWb8GGz5VliiOop-Bu6tkMCcj3AW-6myWuwYF_p2mT4XsvycMbEbbi87l8Xw/exec",
+<script>
+    // URL API สำหรับเชื่อมต่อไปยัง Backend (GAS) ของคุณ
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbyj5makwEBWb8GGz5VliiOop-Bu6tkMCcj3AW-6myWuwYF_p2mT4XsvycMbEbbi87l8Xw/exec";
+    
+    let currentUser = null;
+    let allServices = [];
+    let currentServiceRate = 0;
+
+    // โหลดข้อมูลสถิติหน้าแรกทันทีที่เปิดเว็บ
+    window.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // ดึงข้อมูลรวมโดยการส่ง userId แบบว่าง/null เพื่อเอาแค่ข้อมูล Global (อิงจากโครงสร้าง API ของคุณ)
+            const res = await callGAS({ action: 'getDashboard', userId: null });
+            if(res && res.success) {
+                document.getElementById('auth-stat-users').innerText = res.totalUsers || "0";
+                document.getElementById('auth-stat-orders').innerText = res.totalOrders || "0";
+            }
+        } catch(e) {
+            console.error("ไม่สามารถโหลดข้อมูลสถิติได้", e);
+        }
+    });
+    
+    const categories = [
+        { platform: "TikTok", name: "TikTok [โปรโมชัน]", mult: 3, ids: [16742, 16789, 16798, 16781] },
+        { platform: "TikTok", name: "กดหัวใจ TikTok", mult: 5, ids: [16725, 16762, 16784, 16785, 16786, 16787, 16788, 16789, 16797, 16798] },
+        { platform: "TikTok", name: "กดหัวใจแถมยอดวิว TikTok [ความเร็วสูง]", mult: 5, ids: [14167, 14168, 7625, 7626] },
+        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok [เติมยอดลดออโต้]", mult: 5, ids: [16741, 16742] },
+        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok", mult: 5, ids: [16746, 16747, 16748, 16790, 16791, 16792] },
+        { platform: "TikTok", name: "เพิ่มผู้ติดตาม TikTok [บัญชีคุณภาพสูง] [ความเร็วสูง]", mult: 3, ids: [16097, 16673, 16781, 16782, 16783, 16773, 16777, 7623, 7909] },
+        { platform: "TikTok", name: "บันทึกวีดีโอ TikTok [ความเร็วสูง]", mult: 5, ids: [16799, 16800, 16801, 16802] },
+        { platform: "TikTok", name: "แชร์/รีโพสต์ TikTok [ความเร็วสูง]", mult: 5, ids: [8309, 8310, 8311] },
+        { platform: "TikTok", name: "กดใจสตรีมสด TikTok Live", mult: 5, ids: [8319] },
+        { platform: "TikTok", name: "เพิ่มคนดูสตรีมสด TikTok Live", mult: 3, ids: [8347, 8348, 8349] },
+        { platform: "TikTok", name: "เพิ่มคอมเมนต์ TikTok [ความเร็วสูง]", mult: 3, ids: [15976, 15977, 15978] },
+        { platform: "TikTok", name: "เพิ่มคอมเมนต์สตรีมสด TikTok Live [ความเร็วสูง]", mult: 3, ids: [14267] },
+        { platform: "TikTok", name: "บริการ TikTok คนไทย", mult: 5, ids: [15689, 15690] },
+
+        { platform: "Instagram", name: "Instagram [โปรโมชัน]", mult: 3, ids: [16167, 14170, 16217] },
+        { platform: "Instagram", name: "เพิ่มไลค์ Instagram", mult: 5, ids: [16167, 16179, 16218, 16219, 16220, 15564, 15565, 14174, 14173] },
+        { platform: "Instagram", name: "เพิ่มยอดวิว Instagram [ Video/Reels/TV ]", mult: 5, ids: [14170, 14169, 14181, 14171] },
+        { platform: "Instagram", name: "เพิ่มผู้ติดตาม Instagram", mult: 3, ids: [16215, 16216, 16184, 16191, 15843] },
+        { platform: "Instagram", name: "เพิ่มความคิดเห็น Instagram [ดีที่สุดในตลาด]", mult: 3, ids: [11756, 11758, 11759, 11760] },
+        { platform: "Instagram", name: "เพิ่มบันทึก Instagram", mult: 5, ids: [9818, 9824, 9825] },
+        { platform: "Instagram", name: "เพิ่มแชร์ Instagram", mult: 5, ids: [13964, 13965] },
+        { platform: "Instagram", name: "Instagram คนไทย", mult: 2, ids: [3359, 3356, 3434] },
+
+        { platform: "Facebook", name: "Facebook [โปรโมชัน]", mult: 3, ids: [16130, 16734, 15363] },
+        { platform: "Facebook", name: "กดถูกใจโพสต์ Facebook [เลือกไอคอนได้]", mult: 5, ids: [16130, 15742, 15743, 15744, 15745, 15746, 15747, 15748] },
+        { platform: "Facebook", name: "เพิ่มยอดวิววีดีโอ Facebook [ความเร็วดีที่สุด]", mult: 5, ids: [16734, 16735, 16736] },
+        { platform: "Facebook", name: "เพิ่มผู้ติดตาม โปรไฟล์/เพจ Facebook", mult: 3, ids: [16129, 16740, 16131, 15941, 15753, 15454, 15357, 15369, 15363] },
+        { platform: "Facebook", name: "เพิ่มคอมเมนต์ Facebook", mult: 3, ids: [13576] },
+        { platform: "Facebook", name: "เพิ่มคนเข้ากลุ่ม Facebook [ความเร็วสูง]", mult: 5, ids: [15755, 15756, 7040] },
+        { platform: "Facebook", name: "เพิ่มยอดวิวสตอรี่ Facebook", mult: 5, ids: [15468] },
+        { platform: "Facebook", name: "แชร์โพสต์ Facebook", mult: 5, ids: [15126, 15127, 7037, 7042] },
+        { platform: "Facebook", name: "เพิ่มคนดูสตรีมสด Facebook", mult: 3, ids: [14214, 14215, 14216] },
+        { platform: "Facebook", name: "Facebook คนไทย", mult: 4, ids: [4937, 16688, 15685, 15686] },
+
+        { platform: "Lemon8", name: "Lemon 8 คนไทยล้วน", mult: 4, ids: [13636, 13637, 13638] },
+
+        { platform: "YouTube", name: "กดไลค์ YouTube [เร็วมาก]", mult: 5, ids: [13402, 13407, 8840] },
+        { platform: "YouTube", name: "เพิ่มยอดวิว YouTube", mult: 3, ids: [16273, 16256, 16242, 15954, 13695, 9077, 9078] },
+        { platform: "YouTube", name: "เพิ่มผู้ติดตาม Subscribe YouTube", mult: 3, ids: [15579] },
+        { platform: "YouTube", name: "กดไลค์ความคิดเห็น YouTube", mult: 5, ids: [16258, 16259] },
+        { platform: "YouTube", name: "เพิ่มคนดูสตรีม YouTube", mult: 3, ids: [14604, 14606, 14607, 14612] },
+
+        { platform: "X (Twitter)", name: "กดถูกใจ X (Twitter)", mult: 3, ids: [16618, 16615] },
+        { platform: "X (Twitter)", name: "เพิ่มยอดวิว + การเข้าถึง X (Twitter)", mult: 6, ids: [16192, 16193, 16204, 16205, 16207, 16622, 16623, 16626] },
+        { platform: "X (Twitter)", name: "เพิ่มผู้ติดตาม X (Twitter)", mult: 3, ids: [16201] },
+
+        { platform: "บริการอื่นๆ", name: "บริการกดรายงาน Report สแปมบัญชี", mult: 5, ids: [4821, 4823, 4826, 4827, 4831, 4837] }
+    ];
+
+    const linkExamples = {
+        "TikTok": "https://vt.tiktok.com/xxxxx/",
+        "Instagram": "https://www.instagram.com/p/xxxx/",
+        "Facebook": "https://www.facebook.com/watch?v=1234",
+        "Lemon8": "https://s.lemon8-app.com/...",
+        "YouTube": "https://youtube.com/...",
+        "X (Twitter)": "https://x.com/user/status/123",
+        "บริการอื่นๆ": "https://..."
+    };
+
+    function switchTab(tabId, btnElement) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.remove('hidden');
+        if(btnElement) btnElement.classList.add('active');
+    }
+
+    function toggleAuth() {
+        document.getElementById('login-form').classList.toggle('hidden');
+        document.getElementById('register-form').classList.toggle('hidden');
+    }
+
+    // ฟังก์ชันยิง API แบบ fetch (สำหรับใช้บน GitHub)
+    async function callGAS(data) {
+        try {
+            const response = await fetch(GAS_URL, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        } catch(e) {
+            return { success: false, message: "Network Error: ระบบขัดข้อง ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้" };
+        }
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button'); btn.innerText = "กำลังเข้าสู่ระบบ...";
+        const res = await callGAS({ action: 'login', userId: document.getElementById('login-id').value, password: document.getElementById('login-pass').value });
+        btn.innerHTML = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> เข้าสู่ระบบ`;
+        if(res.success) { currentUser = res.user; initDashboard(); } else { alert(res.message); }
+    });
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button'); btn.innerText = "กำลังสมัคร...";
+        const res = await callGAS({ action: 'register', userId: document.getElementById('reg-id').value, password: document.getElementById('reg-pass').value, name: document.getElementById('reg-name').value });
+        btn.innerHTML = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 7a4 4 0 1 1 8 0 4 4 0 0 1-8 0zM20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> ยืนยันการสมัคร`;
+        if(res.success) { alert("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ"); toggleAuth(); } else { alert(res.message); }
+    });
+
+    function logout() { currentUser = null; document.getElementById('dashboard-view').classList.add('hidden'); document.getElementById('auth-view').classList.remove('hidden'); }
+
+    async function initDashboard() {
+        document.getElementById('auth-view').classList.add('hidden');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+        document.getElementById('welcome-modal').classList.remove('hidden');
+        
+        refreshData();
+        setInterval(refreshData, 180000); 
+        
+        const res = await callGAS({ action: 'getServices' });
+        if(res.success) {
+            allServices = res.data;
+            populateCategories();
+        }
+    }
+
+    function populateCategories() {
+        let catSelect = document.getElementById('category-select');
+        let html = '<option value="">-- เลือกหมวดหมู่บริการ --</option>';
+        let currentPlatform = "";
+        
+        categories.forEach((cat, index) => {
+            if(cat.platform !== currentPlatform) {
+                if(currentPlatform !== "") html += '</optgroup>';
+                html += `<optgroup label="${cat.platform}">`;
+                currentPlatform = cat.platform;
+            }
+            html += `<option value="${index}">${cat.name}</option>`;
+        });
+        html += '</optgroup>';
+        catSelect.innerHTML = html;
+    }
+
+    async function refreshData() {
+        if(!currentUser) return;
+        callGAS({ action: 'syncStatus', userId: currentUser.userId });
+        const data = await callGAS({ action: 'getDashboard', userId: currentUser.userId });
+        if(data.success) {
+            document.getElementById('user-credit').innerText = parseFloat(data.credit).toFixed(2);
+            document.getElementById('stat-users').innerText = data.totalUsers;
+            document.getElementById('stat-orders').innerText = data.totalOrders;
             
-            PRICING: {
-                'tiktok': { default: 5, exceptions: { '16097':3,'16673':3,'16781':3,'16782':3,'16783':3,'16773':3,'16777':3,'7623':3,'7909':3, '15976':3,'15977':3,'15978':3, '14267':3, '8347':3,'8348':3,'8349':3 } },
-                'instagram': { default: 5, exceptions: { '16215':3,'16216':3,'16184':3,'16191':3,'15843':3, '11756':3,'11758':3,'11759':3,'11760':3, '3359':2,'3356':2,'3434':2 } },
-                'facebook': { default: 5, exceptions: { '16129':3,'16740':3,'16131':3,'15941':3,'15753':3,'15454':3,'15357':3,'15369':3,'15363':3, '13576':3, '14214':3,'14215':3,'14216':3, '4937':4,'16688':4,'15685':4,'15686':4 } },
-                'lemon8': { default: 4, exceptions: {} },
-                'youtube': { default: 3, exceptions: { '13402':5,'13407':5,'8840':5 } },
-                'x': { default: 3, exceptions: { '16192':6,'16193':6,'16204':6,'16205':6,'16207':6,'16622':6,'16623':6,'16626':6 } },
-                'promo': { default: 3, exceptions: {} }
-            },
-            KEYWORDS: {
-                'tiktok': 'tiktok', 'instagram': 'instagram|ig ', 'facebook': 'facebook|fb ', 
-                'lemon8': 'lemon', 'youtube': 'youtube|yt ', 'x': 'twitter| x ', 'promo': 'โปรโมชัน'
+            // อัปเดตสถิติหน้าเข้าสู่ระบบเผื่อไว้เวลาล็อกเอาท์
+            document.getElementById('auth-stat-users').innerText = data.totalUsers;
+            document.getElementById('auth-stat-orders').innerText = data.totalOrders;
+            
+            let mText = data.allHistory.slice(0, 3).map(h => `รหัส: ${h.order_id} | ${h.service} | สถานะ: ${h.status}`).join('    •    ');
+            document.getElementById('marquee-text').innerHTML = mText || "ยังไม่มีประวัติการสั่งซื้อ...";
+
+            const tbody = document.getElementById('history-table');
+            tbody.innerHTML = '';
+            data.history.forEach(h => {
+                tbody.innerHTML += `<tr><td>${h.order_id}</td><td>${h.service.substring(0,25)}...</td><td>${h.qty}</td><td>${parseFloat(h.price).toFixed(2)}</td><td><span class="status-badge status-${h.status}">${h.status}</span></td></tr>`;
+            });
+        }
+    }
+
+    function loadServices() {
+        const catIndex = document.getElementById('category-select').value;
+        const sSelect = document.getElementById('service-select');
+        sSelect.innerHTML = '<option value="">-- เลือกบริการ --</option>';
+        document.getElementById('service-info').classList.add('hidden');
+        document.getElementById('order-price').innerText = "0.00";
+        document.getElementById('order-qty').value = '';
+        document.getElementById('order-comments').value = '';
+        
+        if(catIndex === "") return;
+        
+        const cat = categories[catIndex];
+        let filtered = allServices.filter(s => cat.ids.includes(parseInt(s.service)));
+        
+        cat.ids.forEach(id => {
+            let s = filtered.find(srv => parseInt(srv.service) === id);
+            if(s) {
+                sSelect.innerHTML += `<option value="${s.service}" data-rate="${s.rate}" data-min="${s.min}" data-max="${s.max}" data-type="${s.type}">${s.name}</option>`;
+            }
+        });
+    }
+
+    function updateServiceInfo() {
+        const catIndex = document.getElementById('category-select').value;
+        const sSelect = document.getElementById('service-select');
+        const opt = sSelect.options[sSelect.selectedIndex];
+        const infoDiv = document.getElementById('service-info');
+        
+        if(!opt.value || catIndex === "") { infoDiv.classList.add('hidden'); return; }
+        
+        const cat = categories[catIndex];
+        const sType = opt.getAttribute('data-type');
+        const sName = opt.text;
+        
+        currentServiceRate = (parseFloat(opt.getAttribute('data-rate')) * cat.mult) / 1000;
+        
+        document.getElementById('info-price').innerText = `${(currentServiceRate * 1000).toFixed(2)} บาท / 1,000 ยอด`;
+        document.getElementById('info-link').innerText = linkExamples[cat.platform] || "https://...";
+        document.getElementById('info-minmax').innerText = `ขั้นต่ำ ${opt.getAttribute('data-min')} / สูงสุด ${opt.getAttribute('data-max')}`;
+        
+        const qtyInput = document.getElementById('order-qty');
+        const commentsInput = document.getElementById('order-comments');
+
+        if (sType === 'Custom Comments' || sType === 'custom_comments' || sName.includes('กำหนดเอง')) {
+            qtyInput.classList.add('hidden');
+            qtyInput.readOnly = true;
+            commentsInput.classList.remove('hidden');
+            commentsInput.value = '';
+            qtyInput.value = '';
+        } else {
+            qtyInput.classList.remove('hidden');
+            qtyInput.readOnly = false;
+            commentsInput.classList.add('hidden');
+            commentsInput.value = '';
+        }
+
+        infoDiv.classList.remove('hidden');
+        calculatePrice();
+    }
+
+    function calculateCommentQty() {
+        const comments = document.getElementById('order-comments').value;
+        const lines = comments.split('\n').filter(line => line.trim() !== '');
+        document.getElementById('order-qty').value = lines.length || '';
+        calculatePrice();
+    }
+
+    function calculatePrice() {
+        const qty = document.getElementById('order-qty').value;
+        if(qty && currentServiceRate > 0) {
+            document.getElementById('order-price').innerText = (qty * currentServiceRate).toFixed(2);
+        } else {
+            document.getElementById('order-price').innerText = "0.00";
+        }
+    }
+
+    function confirmOrder() {
+        const sSelect = document.getElementById('service-select');
+        const isCustomComment = !document.getElementById('order-comments').classList.contains('hidden');
+
+        if(!sSelect.value || !document.getElementById('order-link').value || !document.getElementById('order-qty').value) {
+            alert("กรุณากรอกข้อมูลให้ครบถ้วนก่อนทำรายการครับ"); 
+            return;
+        }
+        
+        if(isCustomComment && document.getElementById('order-qty').value < 1) {
+            alert("กรุณาพิมพ์คอมเมนต์อย่างน้อย 1 บรรทัด");
+            return;
+        }
+
+        document.getElementById('warning-modal').classList.remove('hidden');
+    }
+
+    async function processOrder() {
+        closeModal('warning-modal');
+        const sSelect = document.getElementById('service-select');
+        const btn = document.querySelector('#tab-order button.action-btn');
+        btn.innerText = "กำลังส่งคำสั่งซื้อ..."; btn.disabled = true;
+
+        const isCustomComment = !document.getElementById('order-comments').classList.contains('hidden');
+        const commentsData = isCustomComment ? document.getElementById('order-comments').value.split('\n').filter(l => l.trim() !== '').join('\n') : "";
+
+        const data = {
+            action: 'placeOrder',
+            userId: currentUser.userId,
+            serviceId: sSelect.value,
+            serviceName: sSelect.options[sSelect.selectedIndex].text,
+            link: document.getElementById('order-link').value,
+            quantity: document.getElementById('order-qty').value,
+            price: parseFloat(document.getElementById('order-price').innerText),
+            comments: commentsData
+        };
+        
+        const res = await callGAS(data);
+        alert(res.message);
+        
+        btn.innerText = "ยืนยันการสั่งซื้อ"; btn.disabled = false;
+        
+        if(res.success) {
+            document.getElementById('order-link').value = '';
+            document.getElementById('order-qty').value = '';
+            document.getElementById('order-comments').value = '';
+            refreshData();
+            switchTab('tab-history', document.querySelectorAll('.tab-btn')[2]);
+        }
+    }
+
+    async function submitTopup() {
+        const fileInput = document.getElementById('topup-file');
+        const amt = document.getElementById('topup-amount').value;
+        const ref = document.getElementById('topup-ref').value;
+        
+        if(!fileInput.files[0] || !amt || ref.length !== 6) { alert("กรุณากรอกข้อมูลให้ครบและถูกต้อง (รหัสอ้างอิง 6 ตัว)"); return; }
+        
+        const btn = document.querySelector('#tab-topup button.action-btn');
+        btn.innerText = "กำลังประมวลผล..."; btn.disabled = true;
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = async function() {
+            const base64 = reader.result.split(',')[1];
+            const res = await callGAS({ action: 'topUp', userId: currentUser.userId, amount: amt, ref: ref, fileBase64: base64, mimeType: file.type });
+            alert(res.message);
+            btn.innerText = "แจ้งโอนเงิน"; btn.disabled = false;
+            
+            if(res.success) { 
+                document.getElementById('topup-amount').value=''; 
+                document.getElementById('topup-ref').value=''; 
+                fileInput.value=''; 
+                refreshData(); 
             }
         };
+        reader.readAsDataURL(file);
+    }
 
-        const state = {
-            user: null,
-            services: [],
-            selectedCategory: null,
-            selectedService: null,
-            historyInterval: null
-        };
-
-        const app = {
-            showLoading: (show) => {
-                const el = document.getElementById('loading-overlay');
-                if(show) el.classList.remove('hide');
-                else el.classList.add('hide');
-            },
-
-            showModal: (id) => document.getElementById(id).classList.remove('hide'),
-            closeModal: (id) => document.getElementById(id).classList.add('hide'),
-
-            // **แก้ไขการเชื่อมต่อ API ตัด Headers ออกเพื่อแก้ปัญหา CORS บน GitHub Pages**
-            requestAPI: async (payload) => {
-                app.showLoading(true);
-                try {
-                    const res = await fetch(CONFIG.API_URL, {
-                        method: 'POST',
-                        body: JSON.stringify(payload)
-                    });
-                    const data = await res.json();
-                    app.showLoading(false);
-                    return data;
-                } catch (error) {
-                    app.showLoading(false);
-                    console.error("API Error Details:", error);
-                    alert("เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์ กรุณาตรวจสอบ URL หรือการตั้งค่าสิทธิ์ให้เป็น 'ทุกคน' (Anyone)");
-                    return { success: false };
-                }
-            },
-
-            authenticate: async (action) => {
-                const u = document.getElementById('auth-username').value.trim();
-                const p = document.getElementById('auth-password').value.trim();
-                
-                if(!u || !p) return alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-
-                const res = await app.requestAPI({ action: action, userId: u, password: p, name: u });
-                
-                if (res.success) {
-                    if (action === 'login') {
-                        state.user = res.user;
-                        app.initDashboard();
-                    } else {
-                        alert(res.message + "\nสามารถเข้าสู่ระบบได้เลยค่ะ");
-                    }
-                } else {
-                    alert(res.message);
-                }
-            },
-
-            logout: () => {
-                if(!confirm('ต้องการออกจากระบบใช่หรือไม่?')) return;
-                state.user = null;
-                clearInterval(state.historyInterval);
-                
-                document.getElementById('view-dashboard').classList.add('hide');
-                document.getElementById('nav-user-info').classList.add('hide');
-                document.getElementById('view-auth').classList.remove('hide');
-                
-                document.getElementById('auth-username').value = '';
-                document.getElementById('auth-password').value = '';
-            },
-
-            initDashboard: async () => {
-                document.getElementById('view-auth').classList.add('hide');
-                document.getElementById('view-dashboard').classList.remove('hide');
-                document.getElementById('nav-user-info').classList.remove('hide');
-                
-                app.updateCreditDisplay();
-                app.showModal('modal-howto');
-                
-                if(state.services.length === 0) {
-                    const resSrv = await app.requestAPI({ action: 'get_services' });
-                    if(resSrv.success) state.services = resSrv.services;
-                }
-
-                await app.syncHistory();
-                state.historyInterval = setInterval(app.syncHistory, 240000);
-            },
-
-            updateCreditDisplay: () => {
-                document.getElementById('display-credit').innerText = parseFloat(state.user.credit).toFixed(2);
-            },
-
-            switchTab: (tabName) => {
-                ['order', 'topup', 'history'].forEach(t => {
-                    document.getElementById(`tab-${t}`).classList.add('hide');
-                    document.getElementById(`btn-tab-${t}`).style.border = "none";
-                });
-                document.getElementById(`tab-${tabName}`).classList.remove('hide');
-                document.getElementById(`btn-tab-${tabName}`).style.border = "2px solid var(--primary-pink)";
-                
-                if(tabName === 'history') app.syncHistory();
-            },
-
-            selectCategory: (catId, element) => {
-                document.querySelectorAll('.cat-card').forEach(el => el.classList.remove('active'));
-                element.classList.add('active');
-                
-                state.selectedCategory = catId;
-                state.selectedService = null;
-                
-                document.getElementById('step-details-container').classList.add('hide');
-                document.getElementById('input-qty').value = '';
-                document.getElementById('input-price').value = '0.00';
-
-                app.renderServiceList(catId);
-            },
-
-            renderServiceList: (catId) => {
-                const container = document.getElementById('service-list');
-                const step2 = document.getElementById('step-service-container');
-                container.innerHTML = '';
-                step2.classList.remove('hide');
-
-                const keywordRegex = new RegExp(CONFIG.KEYWORDS[catId], 'i');
-                let filtered = state.services.filter(s => keywordRegex.test(s.name) || keywordRegex.test(s.category));
-
-                if(filtered.length === 0) {
-                    container.innerHTML = '<div class="col-span-2 text-center text-gray-400 py-4">ไม่พบบริการในหมวดหมู่นี้</div>';
-                    return;
-                }
-
-                filtered.forEach(s => {
-                    let cleanName = s.name.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
-                    
-                    const div = document.createElement('div');
-                    div.className = 'service-item bg-white p-3 rounded-xl flex flex-col justify-between h-full';
-                    div.innerHTML = `
-                        <div>
-                            <div class="text-[10px] font-bold text-pink-500 mb-1">ID: ${s.service}</div>
-                            <div class="text-sm font-semibold text-gray-800 leading-tight">${cleanName}</div>
-                        </div>
-                        <div class="mt-2 text-right">
-                            <span class="text-[10px] bg-gray-100 px-2 py-1 rounded-full text-gray-500"><i class="fa-solid fa-arrow-right"></i> เลือก</span>
-                        </div>
-                    `;
-                    div.onclick = () => app.selectService(s, div);
-                    container.appendChild(div);
-                });
-            },
-
-            selectService: (srv, element) => {
-                document.querySelectorAll('.service-item').forEach(el => el.classList.remove('selected'));
-                element.classList.add('selected');
-                
-                state.selectedService = srv;
-                
-                const detailBox = document.getElementById('step-details-container');
-                detailBox.classList.remove('hide');
-                
-                let cleanName = srv.name.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
-                let cleanDesc = (srv.description || 'ไม่มีรายละเอียดเพิ่มเติม').replace(/<[^>]*>?/gm, '');
-
-                document.getElementById('info-srv-name').innerText = cleanName;
-                document.getElementById('info-srv-id').innerText = srv.service;
-                document.getElementById('info-srv-minmax').innerText = `${srv.min} / ${srv.max}`;
-                document.getElementById('info-srv-desc').innerText = cleanDesc;
-
-                app.calculatePrice();
-                detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            },
-
-            calculatePrice: () => {
-                if(!state.selectedService) return;
-                
-                const qtyInput = document.getElementById('input-qty').value;
-                const qty = parseInt(qtyInput) || 0;
-                const rules = CONFIG.PRICING[state.selectedCategory];
-                
-                let isEvenDay = new Date().getDate() % 2 === 0;
-                let defaultMult = rules.default;
-                if (['tiktok', 'instagram', 'facebook'].includes(state.selectedCategory)) {
-                    defaultMult = isEvenDay ? 5 : 6;
-                }
-
-                let finalMultiplier = defaultMult;
-                if(rules.exceptions[state.selectedService.service]) {
-                    finalMultiplier = rules.exceptions[state.selectedService.service];
-                }
-
-                const baseRatePer1000 = parseFloat(state.selectedService.rate);
-                const customRatePer1000 = baseRatePer1000 * finalMultiplier;
-                
-                const totalPrice = (qty / 1000) * customRatePer1000;
-                document.getElementById('input-price').value = totalPrice.toFixed(2);
-            },
-
-            submitOrder: async () => {
-                if(!state.selectedService) return alert("กรุณาเลือกบริการ");
-                
-                const link = document.getElementById('input-link').value.trim();
-                const qty = parseInt(document.getElementById('input-qty').value);
-                const price = parseFloat(document.getElementById('input-price').value);
-
-                if(!link) return alert("กรุณาระบุลิงก์");
-                if(qty < state.selectedService.min || qty > state.selectedService.max) {
-                    return alert(`จำนวนต้องอยู่ระหว่าง ${state.selectedService.min} ถึง ${state.selectedService.max}`);
-                }
-                if(parseFloat(state.user.credit) < price) {
-                    return alert("เครดิตไม่เพียงพอ กรุณาเติมเงินเข้าระบบ");
-                }
-
-                const confirmMsg = `ยืนยันการสั่งซื้อ?\n\nบริการ ID: ${state.selectedService.service}\nจำนวน: ${qty}\nยอดหัก: ฿${price.toFixed(2)}`;
-                if(!confirm(confirmMsg)) return;
-
-                const payload = {
-                    action: 'place_order',
-                    userId: state.user.userId,
-                    serviceId: state.selectedService.service,
-                    link: link,
-                    qty: qty,
-                    price: price
-                };
-
-                const res = await app.requestAPI(payload);
-                if(res.success) {
-                    alert("สั่งซื้อสำเร็จ! เริ่มทำงานทันที");
-                    state.user.credit = res.newCredit;
-                    app.updateCreditDisplay();
-                    
-                    document.getElementById('input-link').value = '';
-                    document.getElementById('input-qty').value = '';
-                    document.getElementById('input-price').value = '0.00';
-                    app.switchTab('history');
-                } else {
-                    alert("ล้มเหลว: " + res.message);
-                }
-            },
-
-            submitTopup: () => {
-                const amount = document.getElementById('topup-amount').value;
-                const ref = document.getElementById('topup-ref').value.trim();
-                const fileInput = document.getElementById('topup-file');
-
-                if(!amount || parseFloat(amount) <= 0) return alert("กรุณาระบุจำนวนเงินที่ถูกต้อง");
-                if(!ref || ref.length !== 6) return alert("กรุณาระบุเลขที่อ้างอิง 6 ตัวท้าย");
-                if(!fileInput.files[0]) return alert("กรุณาแนบรูปสลิป");
-
-                const file = fileInput.files[0];
-                const reader = new FileReader();
-                
-                reader.onload = async function(e) {
-                    const base64Data = e.target.result;
-                    const res = await app.requestAPI({
-                        action: 'topup',
-                        userId: state.user.userId,
-                        amount: amount,
-                        refCode: ref,
-                        fileData: base64Data
-                    });
-
-                    if(res.success) {
-                        alert("แจ้งโอนเงินสำเร็จ! ระบบเพิ่มเครดิตให้แล้ว");
-                        state.user.credit = res.newCredit;
-                        app.updateCreditDisplay();
-                        
-                        document.getElementById('topup-amount').value = '';
-                        document.getElementById('topup-ref').value = '';
-                        document.getElementById('file-name').innerText = 'คลิกเพื่อเลือกไฟล์รูปภาพ';
-                        fileInput.value = '';
-                    } else {
-                        alert("ขัดข้อง: " + res.message);
-                    }
-                };
-                reader.readAsDataURL(file);
-            },
-
-            syncHistory: async () => {
-                if(!state.user) return;
-                
-                await app.requestAPI({ action: 'sync_status', userId: state.user.userId });
-                const res = await app.requestAPI({ action: 'get_dashboard', userId: state.user.userId });
-                
-                if(res.success) {
-                    const uEl = document.getElementById('stat-total-users');
-                    if(uEl) uEl.innerText = res.totalUsers.toLocaleString();
-                    const oEl = document.getElementById('stat-total-orders');
-                    if(oEl) oEl.innerText = res.totalOrders.toLocaleString();
-
-                    if(res.recentGlobalOrders && res.recentGlobalOrders.length > 0) {
-                        document.getElementById('marquee-text').innerHTML = 
-                            '<i class="fa-solid fa-bolt text-yellow-500 mr-2"></i>อัปเดตงานล่าสุด: ' + res.recentGlobalOrders.join(' &nbsp;|&nbsp; ');
-                    }
-
-                    const tbody = document.getElementById('history-table-body');
-                    tbody.innerHTML = '';
-                    
-                    if(res.userOrders.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-gray-400">ยังไม่มีประวัติการสั่งซื้อ</td></tr>';
-                    } else {
-                        res.userOrders.forEach(o => {
-                            let s = o.status.toLowerCase();
-                            let badgeClass = 'badge-gray';
-                            let icon = 'fa-clock';
-                            
-                            if(['completed', 'success'].includes(s)) { badgeClass = 'badge-green'; icon = 'fa-check'; }
-                            else if(s === 'canceled' || s.includes('refund')) { badgeClass = 'badge-red'; icon = 'fa-times'; }
-                            else if(['processing', 'in progress'].includes(s)) { badgeClass = 'badge-blue'; icon = 'fa-spinner fa-spin'; }
-                            else if(s === 'partial') { badgeClass = 'badge-yellow'; icon = 'fa-star-half-stroke'; }
-
-                            tbody.innerHTML += `
-                                <tr class="border-b hover:bg-pink-50 transition">
-                                    <td class="px-4 py-3 font-mono font-bold text-gray-700">#${o.order_id}</td>
-                                    <td class="px-4 py-3">
-                                        <div class="truncate max-w-[150px] text-xs font-semibold" title="${o.service}">ID: ${o.service}</div>
-                                    </td>
-                                    <td class="px-4 py-3 text-gray-600">${o.qty.toLocaleString()}</td>
-                                    <td class="px-4 py-3 text-pink-600 font-bold">฿${parseFloat(o.price).toFixed(2)}</td>
-                                    <td class="px-4 py-3">
-                                        <span class="badge ${badgeClass} uppercase"><i class="fa-solid ${icon} mr-1"></i>${o.status}</span>
-                                    </td>
-                                </tr>
-                            `;
-                        });
-                    }
-                }
-            }
-        };
-
-        window.onload = async () => {
-             const res = await app.requestAPI({ action: 'get_dashboard', userId: null });
-             if(res.success) {
-                document.getElementById('stat-total-users').innerText = res.totalUsers.toLocaleString();
-                document.getElementById('stat-total-orders').innerText = res.totalOrders.toLocaleString();
-             }
-        };
-
-    </script>
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+</script>
 </body>
 </html>
