@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingAds - บริการเพิ่มยอดโซเชียล 24 ชม.</title>
-    <link rel="icon" type="image/png" href="https://img1.pic.in.th/images/Kingads---2.png">
+    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -148,7 +148,7 @@
 
 <div id="auth-view" class="container">
     <div class="card text-center" style="margin-top: 30px;">
-        <img src="https://img1.pic.in.th/images/Kingads---2.png" class="logo" alt="KingAds Logo" style="height: 90px; margin-bottom: 20px;">
+        <img src="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png" class="logo" alt="KingAds Logo" style="height: 90px; margin-bottom: 20px;">
         <h2 style="color: var(--text); margin-bottom: 20px;">เข้าสู่ระบบ</h2>
         <form id="login-form">
             <input type="text" id="login-id" placeholder="ชื่อผู้ใช้" required>
@@ -186,7 +186,7 @@
 <div id="dashboard-view" class="hidden">
     <div class="container" style="padding-bottom: 0;">
         <div class="header-card">
-            <img src="https://img1.pic.in.th/images/Kingads---2.png" class="logo" alt="KingAds Logo">
+            <img src="https://img5.pic.in.th/file/secure-sv1/Kingadsd801d6d4603e6134.png" class="logo" alt="KingAds Logo">
             <div style="text-align: right;">
                 <p style="font-size: 12px; color: var(--text-light);">ยอดคงเหลือ</p>
                 <p><strong id="user-credit" style="color:var(--primary); font-size: 20px;">0.00</strong> ฿</p>
@@ -311,13 +311,13 @@
         <div style="color: #ff6b6b; margin-bottom: 10px;">
             <svg style="width: 50px; height: 50px;" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
-        <h2 style="color: #ff6b6b;">คำเตือนก่อนสั่งซื้อ!</h2>
+        <h2 style="color: #ff6b6b;">คำเตือนก่อนสั่งซื้อ</h2>
         <ul>
             <li><b>ตั้งเป็นสาธารณะ:</b> บัญชีต้องเป็น Public ห้ามเป็น Private</li>
             <li><b>ห้ามเปลี่ยนชื่อ:</b> ห้ามเปลี่ยน Username ระหว่างดำเนินการ</li>
-            <li><b>การเติมยอด (Refill):</b> ทำได้เฉพาะเมื่อลิงก์/ชื่อผู้ใช้ยังเหมือนเดิม</li>
+            <li><b>การเติมยอด (Refill):</b> ทำได้เฉพาะเมื่อลิงก์และชื่อผู้ใช้ยังเหมือนเดิม</li>
             <li><b>รอให้เสร็จก่อน:</b> ห้ามสั่งลิงก์เดิมซ้ำหากงานเก่ายังไม่เสร็จสมบูรณ์</li>
-            <li style="color: #ff6b6b; font-weight: 500;">ระบบอัตโนมัติ ไม่สามารถยกเลิก/คืนเงินหากใส่ลิงก์ผิด</li>
+            <li style="color: #ff6b6b; font-weight: 500;">ระบบอัตโนมัติ ไม่สามารถยกเลิกและคืนเงินหากใส่ลิงก์ผิด</li>
         </ul>
         <button class="action-btn" style="margin-top: 15px; background: #ff6b6b;" onclick="processOrder()">ฉันเข้าใจแล้ว สั่งซื้อเลย</button>
         <button class="action-btn secondary-btn" onclick="closeModal('warning-modal')">ยกเลิก</button>
@@ -339,58 +339,61 @@
                 document.getElementById('auth-stat-orders').innerText = res.totalOrders || "0";
             }
         } catch(e) {
-            console.error("ไม่สามารถโหลดข้อมูลสถิติได้", e);
+            console.error("Error", e);
         }
     });
     
-    // อัปเดตข้อมูลบริการ ตัดอิโมจิออก และปรับ baseMult สำหรับคูณราคาตามที่กำหนด
     const categories = [
         { platform: "TikTok", name: "TikTok [โปรโมชัน]", baseMult: 3, isPromo: true, ids: [16742, 16789, 16798, 16781] },
-        { platform: "TikTok", name: "กดหัวใจ TikTok", baseMult: 5, ids: [16725, 16762, 16784, 16785, 16786, 16787, 16788, 16789, 16797, 16798] },
-        { platform: "TikTok", name: "กดหัวใจแถมยอดวิว TikTok [ความเร็วสูง]", baseMult: 5, ids: [14167, 14168, 7625, 7626] },
-        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok [เติมยอดลดออโต้]", baseMult: 5, ids: [16741, 16742] },
-        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok", baseMult: 5, ids: [16746, 16747, 16748, 16790, 16791, 16792] },
-        { platform: "TikTok", name: "เพิ่มผู้ติดตาม TikTok [บัญชีคุณภาพสูง] [ความเร็วสูง]", baseMult: 3, ids: [16097, 16673, 16781, 16782, 16783, 16773, 16777, 7623, 7909, 16776] },
+        { platform: "TikTok", name: "กดหัวใจ TikTok", baseMult: 5, ids: [14139, 14140, 14141, 14142, 14143, 8117, 8118, 8121, 8122] },
+        { platform: "TikTok", name: "กดหัวใจ TikTok [UPDATE]", baseMult: 5, ids: [15270, 15696, 15701, 15948, 15942, 16784, 16785, 16798, 16916, 16917, 16918] },
+        { platform: "TikTok", name: "กดหัวใจแถมยอดวิว TikTok [ความเร็วสูง]", baseMult: 5, ids: [14167, 14168, 13360, 13361, 13362] },
+        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok [ยอดลดเติมออโต้]", baseMult: 5, ids: [16741, 16742, 16937, 16938, 16939, 16940, 16941, 16942, 16943, 16944] },
+        { platform: "TikTok", name: "เพิ่มยอดวิว TikTok", baseMult: 5, ids: [16790, 16743, 16744, 16746, 16076, 16164, 16165] },
+        { platform: "TikTok", name: "เพิ่มผู้ติดตาม TikTok [บัญชีคุณภาพสูง]", baseMult: 3, ids: [16848, 16780, 16709, 16673, 15816, 14186] },
+        { platform: "TikTok", name: "เพิ่มผู้ติดตาม TikTok [ลดเกือบ 0%]", baseMult: 3, ids: [16853, 16859, 15834, 15724, 14190, 14107, 13364, 13365] },
         { platform: "TikTok", name: "บันทึกวีดีโอ TikTok [ความเร็วสูง]", baseMult: 5, ids: [16799, 16800, 16801, 16802] },
-        { platform: "TikTok", name: "แชร์|รีโพสต์ TikTok [ความเร็วสูง]", baseMult: 5, ids: [8309, 8310, 8311, 16834, 16835] },
-        { platform: "TikTok", name: "กดใจสตรีมสด TikTok Live", baseMult: 5, ids: [8319] },
-        { platform: "TikTok", name: "เพิ่มคนดูสตรีมสด TikTok Live", baseMult: 3, ids: [8347, 8348, 8349] },
-        { platform: "TikTok", name: "เพิ่มคอมเมนต์ TikTok [ความเร็วสูง]", baseMult: 3, ids: [15976, 15977, 15978] },
-        { platform: "TikTok", name: "เพิ่มคอมเมนต์สตรีมสด TikTok Live [ความเร็วสูง]", baseMult: 3, ids: [14267] },
-        { platform: "TikTok", name: "บริการ TikTok คนไทย", baseMult: 5, ids: [16845, 16847, 6286] },
+        { platform: "TikTok", name: "รีโพสต์/วีดีโอ TikTok", baseMult: 5, ids: [16834, 16835] },
+        { platform: "TikTok", name: "TikTok Live Stream", baseMult: 3, ids: [16068, 16069, 16070, 14282, 14198, 15919, 15920, 14267] },
+        { platform: "TikTok", name: "เพิ่มคอมเมนต์ TikTok", baseMult: 3, ids: [15976, 15977, 15978] },
+        { platform: "TikTok", name: "บริการ TikTok คนไทย", baseMult: 5, ids: [16845, 16846, 16847, 6286] },
 
         { platform: "Instagram", name: "Instagram [โปรโมชัน]", baseMult: 3, isPromo: true, ids: [16167, 14170, 16217] },
-        { platform: "Instagram", name: "เพิ่มไลค์ Instagram", baseMult: 5, ids: [16167, 16179, 16218, 16219, 16220, 15564, 15565, 14174, 14173] },
-        { platform: "Instagram", name: "เพิ่มยอดวิว Instagram [ Video|Reels|TV ]", baseMult: 5, ids: [14170, 14169, 14181, 14171] },
-        { platform: "Instagram", name: "เพิ่มผู้ติดตาม Instagram", baseMult: 3, ids: [16215, 16216, 16184, 16191, 15843] },
-        { platform: "Instagram", name: "เพิ่มความคิดเห็น Instagram [ดีที่สุดในตลาด]", baseMult: 3, ids: [11756, 11758, 11759, 11760] },
-        { platform: "Instagram", name: "เพิ่มบันทึก Instagram", baseMult: 5, ids: [9818, 9824, 9825] },
-        { platform: "Instagram", name: "เพิ่มแชร์ Instagram", baseMult: 5, ids: [13964, 13965] },
-        { platform: "Instagram", name: "Instagram คนไทย", baseMult: 2, ids: [3359, 3356, 3434] },
+        { platform: "Instagram", name: "เพิ่มไลค์ Instagram", baseMult: 5, ids: [16218, 16219, 16166, 16167, 16174, 16175, 16179, 15644, 15649, 15565, 15561, 15564] },
+        { platform: "Instagram", name: "เพิ่มยอดวิว Instagram [ Video/Reels/TV ]", baseMult: 5, ids: [14170, 14169, 14181, 14171] },
+        { platform: "Instagram", name: "เพิ่มผู้ติดตาม Instagram", baseMult: 3, ids: [16811, 16812, 16816, 16804, 16181, 16182, 15838, 15839, 14098, 14099, 14100] },
+        { platform: "Instagram", name: "เพิ่มความคิดเห็น Instagram [ดีที่สุดในตลาด]", baseMult: 3, ids: [11756, 11760, 9760, 9784] },
+        { platform: "Instagram", name: "เพิ่มบันทึก Instagram", baseMult: 5, ids: [9818, 9825] },
+        { platform: "Instagram", name: "เพิ่มยอดวิว Story Instagram", baseMult: 5, ids: [9797, 9800] },
+        { platform: "Instagram", name: "เพิ่มแชร์ Instagram", baseMult: 5, ids: [9832, 9833] },
+        { platform: "Instagram", name: "Instagram คนไทย", baseMult: 2, ids: [3359, 13732, 3356, 3434] },
 
         { platform: "Facebook", name: "Facebook [โปรโมชัน]", baseMult: 3, isPromo: true, ids: [16130, 16734, 15363] },
-        { platform: "Facebook", name: "กดถูกใจโพสต์ Facebook [เลือกไอคอนได้]", baseMult: 5, ids: [16130, 15742, 15743, 15744, 15745, 15746, 15747, 15748] },
-        { platform: "Facebook", name: "เพิ่มยอดวิววีดีโอ Facebook [ความเร็วดีที่สุด]", baseMult: 5, ids: [16734, 16735, 16736] },
-        { platform: "Facebook", name: "เพิ่มผู้ติดตาม โปรไฟล์/เพจ Facebook", baseMult: 3, ids: [16129, 16740, 16131, 15941, 15753, 15454, 15357, 15369, 15363, 16137, 16138] },
-        { platform: "Facebook", name: "เพิ่มคอมเมนต์ Facebook", baseMult: 3, ids: [13576] },
-        { platform: "Facebook", name: "เพิ่มคนเข้ากลุ่ม Facebook [ความเร็วสูง]", baseMult: 5, ids: [15755, 15756, 7040] },
-        { platform: "Facebook", name: "เพิ่มยอดวิวสตอรี่ Facebook", baseMult: 5, ids: [15468] },
-        { platform: "Facebook", name: "แชร์โพสต์ Facebook", baseMult: 5, ids: [15126, 15127, 7037, 7042] },
-        { platform: "Facebook", name: "เพิ่มคนดูสตรีมสด Facebook", baseMult: 3, ids: [14214, 14215, 14216] },
-        { platform: "Facebook", name: "Facebook คนไทย", baseMult: 4, ids: [4937, 16688, 15685, 15686, 16141, 16142, 16143, 16144, 16145, 16147, 16148] },
+        { platform: "Facebook", name: "กดถูกใจโพสต์ Facebook [เลือกไอคอนได้]", baseMult: 5, ids: [15742, 15743, 15744, 15745, 15746, 15747, 15748, 15669, 15670, 15671, 15672, 15673, 15674, 15675] },
+        { platform: "Facebook", name: "เพิ่มยอดวิววีดีโอ Facebook [ความเร็วดีที่สุด]", baseMult: 5, ids: [16734, 16735, 16736, 15321, 15317, 7204, 15318] },
+        { platform: "Facebook", name: "เพิ่มผู้ติดตาม โปรไฟล์ Facebook", baseMult: 3, ids: [16737, 16128, 16129, 16739, 16740, 16012, 15749, 15750, 15711, 15712] },
+        { platform: "Facebook", name: "เพิ่มผู้ติดตาม เพจ Facebook", baseMult: 3, ids: [15451, 15452, 15453, 15454, 15364, 15368, 15369] },
+        { platform: "Facebook", name: "เพิ่มคอมเมนต์ Facebook", baseMult: 3, ids: [15380] },
+        { platform: "Facebook", name: "เพิ่มคนเข้ากลุ่ม Facebook [ความเร็วสูง]", baseMult: 5, ids: [15455, 15456, 15457, 7040, 7041] },
+        { platform: "Facebook", name: "เพิ่มยอดวิวสตอรี่ Facebook", baseMult: 5, ids: [15710] },
+        { platform: "Facebook", name: "แชร์โพสต์ Facebook", baseMult: 5, ids: [15126, 15127, 7037, 7042, 7043] },
+        { platform: "Facebook", name: "Facebook คนไทย", baseMult: 4, ids: [15684, 15685, 15686, 14835, 14836, 14838, 14839, 14842, 14844, 14845, 14846] },
 
-        { platform: "Lemon8", name: "Lemon 8 คนไทยล้วน", baseMult: 4, ids: [13636, 13637, 13638] },
+        { platform: "Lemon8", name: "ถูกใจ Lemon8 คนไทย", baseMult: 4, ids: [13636] },
+        { platform: "Lemon8", name: "เพิ่มผู้ติดตาม Lemon8 คนไทย", baseMult: 4, ids: [13637] },
+        { platform: "Lemon8", name: "เพิ่มบันทึก Lemon 8 คนไทย", baseMult: 4, ids: [13638] },
 
-        { platform: "YouTube", name: "กดไลค์ YouTube [เร็วมาก]", baseMult: 5, ids: [13402, 13407, 8840] },
-        { platform: "YouTube", name: "เพิ่มยอดวิว YouTube", baseMult: 3, ids: [16273, 16256, 16242, 15954, 13695, 9077, 9078] },
-        { platform: "YouTube", name: "เพิ่มผู้ติดตาม Subscribe YouTube", baseMult: 3, ids: [15579] },
-        { platform: "YouTube", name: "กดไลค์ความคิดเห็น YouTube", baseMult: 3, ids: [16258, 16259] },
-        { platform: "YouTube", name: "เพิ่มคนดูสตรีม YouTube", baseMult: 3, ids: [14604, 14606, 14607, 14612] },
+        { platform: "YouTube", name: "กดไลค์ YouTube [เร็วมาก]", baseMult: 5, ids: [14249, 14250] },
+        { platform: "YouTube", name: "เพิ่มยอดวิว + ไลค์ Live Youtube", baseMult: 3, ids: [16261, 16262, 16263, 16264, 16265] },
+        { platform: "YouTube", name: "เพิ่มคนดู Live", baseMult: 3, ids: [14604, 14605, 14606] },
+        { platform: "YouTube", name: "เพิ่มยอดวิว YouTube", baseMult: 3, ids: [16273, 16274, 15954, 15602] },
+        { platform: "YouTube", name: "เพิ่มผู้ติดตาม Subscribe YouTube", baseMult: 3, ids: [15576, 15578] },
+        { platform: "YouTube", name: "กดไลค์ความคิดเห็น YouTube", baseMult: 5, ids: [14318, 14319] },
 
-        { platform: "X (Twitter)", name: "กดถูกใจ X (Twitter)", baseMult: 3, ids: [16618, 16615] },
-        { platform: "X (Twitter)", name: "เพิ่มยอดวิว + การเข้าถึง X (Twitter)", baseMult: 6, ids: [16192, 16193, 16204, 16205, 16207, 16622, 16623, 16626] },
-        { platform: "X (Twitter)", name: "เพิ่มผู้ติดตาม X (Twitter)", baseMult: 3, ids: [16201, 16198, 16659] },
-        { platform: "X (Twitter)", name: "รีทวีต X (Twitter)", baseMult: 3, ids: [8758] },
+        { platform: "X (Twitter)", name: "กดถูกใจ X (Twitter)", baseMult: 3, ids: [16613, 16615, 16616, 16618, 8622] },
+        { platform: "X (Twitter)", name: "รีทวีตจริง X (Twitter)", baseMult: 3, ids: [8750, 8758] },
+        { platform: "X (Twitter)", name: "เพิ่มยอดวิว + การเข้าถึง X (Twitter)", baseMult: 6, ids: [16192, 16193, 16194, 16195, 16204, 16205, 16626, 16627, 16628] },
+        { platform: "X (Twitter)", name: "เพิ่มผู้ติดตาม X (Twitter)", baseMult: 3, ids: [16645, 8693, 16198] },
 
         { platform: "บริการอื่นๆ", name: "บริการกดรายงาน Report สแปมบัญชี", baseMult: 5, ids: [4821, 4823, 4826, 4827, 4831, 4837] }
     ];
@@ -426,8 +429,8 @@
             });
             return await response.json();
         } catch(e) {
-            console.error("Fetch Error:", e);
-            return { success: false, message: "Network Error: ระบบขัดข้อง ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้" };
+            console.error("Fetch Error", e);
+            return { success: false, message: "Network Error" };
         }
     }
 
@@ -444,7 +447,7 @@
         const btn = e.target.querySelector('button'); btn.innerText = "กำลังสมัคร...";
         const res = await callGAS({ action: 'register', userId: document.getElementById('reg-id').value, password: document.getElementById('reg-pass').value, name: document.getElementById('reg-name').value });
         btn.innerHTML = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 7a4 4 0 1 1 8 0 4 4 0 0 1-8 0zM20 8v6M23 11h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> ยืนยันการสมัคร`;
-        if(res.success) { alert("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ"); toggleAuth(); } else { alert(res.message); }
+        if(res.success) { alert("สมัครสมาชิกสำเร็จ"); toggleAuth(); } else { alert(res.message); }
     });
 
     function logout() { currentUser = null; document.getElementById('dashboard-view').classList.add('hidden'); document.getElementById('auth-view').classList.remove('hidden'); }
@@ -526,7 +529,6 @@
         });
     }
 
-    // ฟังก์ชันคำนวณตัวคูณและการสลับราคาตามวันที่
     function updateServiceInfo() {
         const catIndex = document.getElementById('category-select').value;
         const sSelect = document.getElementById('service-select');
@@ -540,7 +542,6 @@
         const sName = opt.text;
         
         let m = cat.baseMult;
-        // ถ้าระบุว่าเป็นไม่ใช่บริการจัดโปรโมชัน ให้บวก 1 สลับแบบวันเว้นวัน
         if (!cat.isPromo) {
             if (new Date().getDate() % 2 !== 0) {
                 m += 1;
@@ -556,7 +557,6 @@
         const qtyInput = document.getElementById('order-qty');
         const commentsInput = document.getElementById('order-comments');
 
-        // ฟังก์ชันรับรองช่องใส่คอมเมนต์กำหนดเองตามที่ร้องขอมา
         if (sType === 'Custom Comments' || sType === 'custom_comments' || sName.includes('กำหนดเอง')) {
             qtyInput.classList.add('hidden');
             qtyInput.readOnly = true;
@@ -646,7 +646,7 @@
         const amt = document.getElementById('topup-amount').value;
         const ref = document.getElementById('topup-ref').value;
         
-        if(!fileInput.files[0] || !amt || ref.length !== 6) { alert("กรุณากรอกข้อมูลให้ครบและถูกต้อง (รหัสอ้างอิง 6 ตัว)"); return; }
+        if(!fileInput.files[0] || !amt || ref.length !== 6) { alert("กรุณากรอกข้อมูลให้ครบและถูกต้อง"); return; }
         
         const btn = document.querySelector('#tab-topup button.action-btn');
         btn.innerText = "กำลังประมวลผล..."; btn.disabled = true;
